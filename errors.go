@@ -1,7 +1,8 @@
 package astikit
 
 import (
-	"errors"
+	// compatible for golang 1.12
+	//"errors"
 	"strings"
 	"sync"
 )
@@ -61,6 +62,7 @@ func (errs *Errors) Error() string {
 
 // ErrorCause returns the cause of an error
 func ErrorCause(err error) error {
+	/* for golang 1.12
 	for {
 		if u := errors.Unwrap(err); u != nil {
 			err = u
@@ -68,4 +70,6 @@ func ErrorCause(err error) error {
 		}
 		return err
 	}
+	*/
+	return err
 }

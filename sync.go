@@ -3,7 +3,8 @@ package astikit
 import (
 	"bytes"
 	"context"
-	"errors"
+	//compatiable for golang 1.12
+	//"errors"
 	"fmt"
 	"runtime"
 	"sync"
@@ -485,5 +486,7 @@ func (m *RWMutex) IsDeadlocked(timeout time.Duration) (bool, string) {
 		m.m.Unlock()
 	}()
 	<-ctx.Done()
-	return errors.Is(ctx.Err(), context.DeadlineExceeded), m.c
+	//compatiable for golang 1.12
+	//return errors.Is(ctx.Err(), context.DeadlineExceeded), m.c
+	return ctx.Err().Error() == context.DeadlineExceeded.Error(), m.c
 }

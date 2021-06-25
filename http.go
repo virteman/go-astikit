@@ -325,9 +325,18 @@ func (d *HTTPDownloader) do(ctx context.Context, fn httpDownloaderFunc, idx int,
 
 	// Create request
 	var r *http.Request
-	if r, err = http.NewRequestWithContext(ctx, src.Method, src.URL, src.Body); err != nil {
+	//compatible for golang 1.12
+	/*
+		if r, err = http.NewRequestWithContext(ctx, src.Method, src.URL, src.Body); err != nil {
+			err = fmt.Errorf("astikit: creating request to %s failed: %w", src.URL, err)
+			return
+		}
+	*/
+	if r, err = http.NewRequest(src.Method, src.URL, src.Body); err != nil {
 		err = fmt.Errorf("astikit: creating request to %s failed: %w", src.URL, err)
 		return
+	} else {
+		r = r.WithContext(ctx)
 	}
 
 	// Copy header

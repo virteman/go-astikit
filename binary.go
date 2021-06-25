@@ -122,14 +122,14 @@ func (w *BitsWriter) WriteBytesN(bs []byte, n int, padByte uint8) error {
 
 func (w *BitsWriter) writeFullInt(in uint64, len int) error {
 	if w.bo == binary.BigEndian {
-		for i := len - 1; i >= 0; i-- {
+		for i := uint(len - 1); i >= 0; i-- {
 			err := w.writeFullByte(byte((in >> (i * 8)) & 0xff))
 			if err != nil {
 				return err
 			}
 		}
 	} else {
-		for i := 0; i < len; i++ {
+		for i := uint(0); i < uint(len); i++ {
 			err := w.writeFullByte(byte((in >> (i * 8)) & 0xff))
 			if err != nil {
 				return err
@@ -193,7 +193,7 @@ func (w *BitsWriter) WriteN(i interface{}, n int) error {
 		return errors.New("astikit: invalid type")
 	}
 
-	for i := n - 1; i >= 0; i-- {
+	for i := uint(n - 1); i >= 0; i-- {
 		err := w.writeBit(byte(toWrite>>i) & 0x1)
 		if err != nil {
 			return err
