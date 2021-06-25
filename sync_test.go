@@ -154,7 +154,7 @@ func TestRWMutex(t *testing.T) {
 	if !d {
 		t.Error("expected true, got false")
 	}
-	if e := "github.com/asticode/go-astikit/sync_test.go:"; !strings.Contains(c, e) {
+	if e := "github.com/virteman/go-astikit/sync_test.go:"; !strings.Contains(c, e) {
 		t.Errorf("%s should contain %s", c, e)
 	}
 	m.Unlock()
@@ -163,7 +163,7 @@ func TestRWMutex(t *testing.T) {
 	if !d {
 		t.Error("expected true, got false")
 	}
-	if e := "github.com/asticode/go-astikit/sync_test.go:"; !strings.Contains(c, e) {
+	if e := "github.com/virteman/go-astikit/sync_test.go:"; !strings.Contains(c, e) {
 		t.Errorf("%s should contain %s", c, e)
 	}
 	m.RUnlock()
